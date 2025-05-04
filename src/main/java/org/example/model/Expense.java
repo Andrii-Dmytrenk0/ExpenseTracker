@@ -1,8 +1,12 @@
 package org.example.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Expense {
     private int id;
@@ -10,8 +14,14 @@ public class Expense {
     private String description;
     private int amount;
 
-    public Expense() {
+    public Expense(int id, Date date, String description, int amount) {
+        this.id = id;
+        this.date = date;
+        this.description = description;
+        this.amount = amount;
+    }
 
+    public Expense() {
     }
 
     public int getId() {
@@ -24,10 +34,6 @@ public class Expense {
 
     public Date getDate() {
         return date;
-    }
-
-    public void setDate(Date date){
-        this.date = date;
     }
 
     public String getDescription() {
@@ -46,21 +52,24 @@ public class Expense {
         this.amount = amount;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, description, amount);
+    }
 
-//    public boolean DataVerification(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Expense expense = (Expense) o;
-//
-//
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Expense expense = (Expense) o;
+        return id == expense.id && amount == expense.amount && Objects.equals(date, expense.date) && Objects.equals(description, expense.description);
+    }
 
-    public String toExpense() {
+    @Override
+    public String toString() {
         return "Expense{" +
                 "ID:" + id +
-                "Date:" + date +
-                "Description" + description +
-                "Amount" + amount + "}";
+                " Date: " + date +
+                " Description: " + description +
+                " Amount: " + amount + "}";
     }
 }
