@@ -66,7 +66,7 @@ public class Expense {
 
     @Override
     public String toString() {
-        return "Expense{" +
+        return "ExpenseFile.txt{" +
                 "ID:" + id +
                 " Date: " + date +
                 " Description: " + description +
